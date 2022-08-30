@@ -1,0 +1,12 @@
+#theNav{
+   position: sticky;
+    top: 0px;
+    display: flex;
+justify-content:center;
+    border-bottom:2px solid black;
+    background-color:yellow;
+}
+main{
+     background-image: url("https://th.bing.com/th/id/OIP.434u-vcbe59_ObEb3a0iAAHaE8?pid=ImgDet&rs=1")
+     
+}
