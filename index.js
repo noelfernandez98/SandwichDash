@@ -1,3 +1,5 @@
+kaboom()
+
 const pauseAction = () => {
     const newArr = document.querySelectorAll('pause');
    let pauseCheck
