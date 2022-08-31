@@ -10,7 +10,7 @@ html {
    position: sticky;
     top: 0px;
     display: flex;
-justify-content:center;
+justify-content:space-between;
     border-bottom:2px solid black;
     background-color:yellow;
 }

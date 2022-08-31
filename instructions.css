@@ -8,7 +8,10 @@
 }
 
 
-
+body{
+    background-image: url(back.jpg)
+    
+}
 
 
 
@@ -19,13 +22,6 @@ justify-content:center;
     position: sticky;
 width:100%;
     top: 0px;
-
-
-
-
-
-
-
 
 }
 
