@@ -4,7 +4,7 @@ kaboom({
 	// Set the default font
 	font: "sinko",
 })
-
+;
  loadSprite("clearsky", "DinerPic.jpg")
 let background = add([
   sprite("clearsky"),
@@ -19,8 +19,9 @@ loadSprite("onions", "onions.png")
 loadSprite("tomatoes", "tomatoes.png")
 loadSprite("bread1", "bread.png")
 loadSprite("bread2", "bread.png")
+loadSprite("cheese", "cheese.png")
 // Load assets
-loadSprite("bean", "character.png")
+loadSprite("bean", "plate.png")
 // Define player movement speed (pixels per second)
 const SPEED = 320
 // Add player game object
@@ -44,10 +45,7 @@ onKeyDown("down", () => {
 	player.move(0, SPEED)
 })
 // onClick() registers an event that runs once when left mouse is clicked
-onClick(() => {
-	// .moveTo() is provided by pos() component, changes the position
-	player.moveTo(mousePos())
-})
+
 add([
 	// text() component is similar to sprite() but renders text
 	text("Press arrow keys", { width: width() / 2 }),
@@ -56,7 +54,73 @@ add([
 loop(1, () => {
     // add tree
     add([
-      sprite('meat'),sprite('lettuce'),
+      sprite('meat'),
+      pos(rand(vec2(width())).x, 10),
+      `tag1`,
+      area(),
+      scale(.2),
+      move(DOWN, 240),
+    ])
+  });
+  loop(1, () => {
+    // add tree
+    add([
+      sprite('lettuce'),
+      pos(rand(vec2(width())).x, 10),
+      `tag1`,
+      area(),
+      scale(.2),
+      move(DOWN, 240),
+    ])
+  });
+  loop(1, () => {
+    // add tree
+    add([
+      sprite('onions'),
+      pos(rand(vec2(width())).x, 10),
+      `tag1`,
+      area(),
+      scale(.2),
+      move(DOWN, 240),
+    ])
+  });
+  loop(1, () => {
+    // add tree
+    add([
+      sprite('bread1'),
+      pos(rand(vec2(width())).x, 10),
+      `tag1`,
+      area(),
+      scale(.2),
+      move(DOWN, 240),
+    ])
+  });
+  loop(1, () => {
+    // add tree
+    add([
+      sprite('bread2'),
+      pos(rand(vec2(width())).x, 10),
+      `tag1`,
+      area(),
+      scale(.2),
+      move(DOWN, 240),
+    ])
+  });
+  loop(1, () => {
+    // add tree
+    add([
+      sprite('tomatoes'),
+      pos(rand(vec2(width())).x, 10),
+      `tag1`,
+      area(),
+      scale(.2),
+      move(DOWN, 240),
+    ])
+  });
+  loop(1, () => {
+    // add tree
+    add([
+      sprite('tomatoes'),
       pos(rand(vec2(width())).x, 10),
       `tag1`,
       area(),
@@ -71,3 +135,8 @@ loop(1, () => {
    start.hidden=true
    howToPlay.hidden=true
      })
+     
+     //Collison section
+     
+
+
