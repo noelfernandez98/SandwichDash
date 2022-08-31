@@ -1,17 +1,18 @@
 
-html {
+/* html {
     background: url(/SandwichDash/SandwichDash/DinerPic.jpg) no-repeat center center fixed;
     background-size: cover;
     height: 100%;
     overflow: hidden;
-}
+} */
 
 #theNav{
-   position: sticky;
+    position: sticky;
     top: 0px;
     display: flex;
-justify-content:center;
-    border-bottom:2px solid black;
-    background-color:yellow;
+    justify-content:center;
+    border-bottom:2px #E8175D;
+    background-color: #1E1E1E;
+    
 }
 
