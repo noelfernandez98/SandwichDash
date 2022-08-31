@@ -169,15 +169,21 @@ loop(50, () => {
 	])
 })
 }
-var score=0
-add([
-	score,
-	pos(10, 10),
+for (let i = 0; i < 2; i++) {
+loop(500, () => {
+	const x = rand(0, width())
+	const y = rand(0, height())
+
+	add([
+		sprite("bread1"),
+		pos(x, y),
 		// Both objects must have area() component to enable collision detection between
-
-	
+		area(),
+		 scale(.2),
+      move(DOWN, 10),
 	])
-
+})
+}
 
 
      const howToPlay=document.getElementById("instructions")
