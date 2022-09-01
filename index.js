@@ -7,7 +7,7 @@ kaboom({
 
 //Timer
 
-
+let scores=[]
 var score = 0
 loadSprite("clearsky", "DinerPic.jpg")
 loadSprite("meat", "meat.png")
@@ -17,6 +17,7 @@ loadSprite("tomatoes", "tomatoes.png")
 loadSprite("bread", "bread.png")
 loadSprite("bread2", "bread.png")
 loadSprite("cheese", "cheese.png")
+loadSprite("burger", "burger.png")
 // Load assets
 loadSprite("bean", "bread.png")
 loadSprite("bone", "bone1.png")
@@ -38,7 +39,7 @@ scene('intro', () => {
 	add([
 
 		text("Welcome to SandWich Dash"),
-		pos(500, 250)
+		pos(500, 200)
 	])
 
 	//create Landing page buttons
@@ -71,12 +72,12 @@ scene('intro', () => {
 		})
 
 	}
-	addButton("start", (500, 100), function() {
+	addButton("Start", (200, 20), function() {
 
 		go('game')
 	})
 
-	addButton("How to Play", (200, 200), function() { document.open("instructions.html", "How To Play", "width=600,height=600") })
+	addButton("How to Play", (600, 200), function() { document.open("instructions.html", "How To Play", "width=600,height=600") })
 })
 go('intro')
 
@@ -95,7 +96,7 @@ scene('outro', () => {
 	add([
 
 		text("Sorry You Ran out of time"),
-		pos(500, 250)
+		pos(400, 250)
 	])
 
 	//create Landing page buttons
@@ -133,14 +134,26 @@ scene('outro', () => {
 		go('game')
 	})
 
-	addButton("How to Play", (200, 200), function() { document.open("instructions.html", "How To Play", "width=600,height=600") })
+	addButton("How to Play", (200, 200), function() {	document.open("instructions.html", "How To Play", "width=600,height=600") })
+	
+
+		
+	
 
 
 	add([
 		// text() component is similar to sprite() but renders text
-		text(`Your New High Score is ${score}`),
+		text(`Your New High Score is ${Math.max(...scores)}`),
 		pos(550, 12),
 	])
+	
+add([
+		sprite("burger"),
+		pos(width() / 2, height() / 2),
+		origin("center"),
+		scale(0.3),
+		fixed()
+	]);
 })
 
 
@@ -156,23 +169,18 @@ scene('game', () => {
 		fixed()
 	]);
 
-var timeOfGame = 120
-// while(timeOfGame>0)
-// {
-// timeOfGame=timeOfGame-1}
-//const li = () => { timeOfGame-- }
-//let autocount = setInterval(li, 1000)
-//var timerText = `Timer:${new Date((timeOfGame)* 1000).toISOString().substring(14, 19)}`;
+var timeOfGame = 60
 
 let timertext=add([
 	text(`Timer:${new Date((timeOfGame)* 1000).toISOString().substring(14, 19)}`),
-	pos(100,100)	
+	pos(15,70)	
 ])
-if (timeOfGame = 0) {
-	go("outro")
-}
+
 loop(1,()=>{
 	timeOfGame--
+	if (timeOfGame === 0) {
+		go("outro")
+	}
 	timertext.text = `Timer:${new Date((timeOfGame)* 1000).toISOString().substring(14, 19)}`;
 })
 	function addButton(txt, p, f) {
@@ -215,7 +223,7 @@ loop(1,()=>{
 	// Define player movement speed (pixels per second)
 	const SPEED = 320;
 	// Add player game object
-	const player = add([
+	var player = add([
 		sprite("bean"),
 		scale(0.2),
 		area(),
@@ -250,7 +258,7 @@ let scoreText=add([
 		text(`Score ${score}`),
 		pos(550, 12),
 	])
-
+scores.push(score)
 
 
 	//Randomizer
@@ -305,18 +313,28 @@ let scoreText=add([
 	
 			score += 10
 			scoreText.text=`Score ${score}`
-		// wait(10, () => {
-		// 	destroy(food)
-		// })
+		
+		scores.push(score)
+			wait(1, () => {
+			destroy(food)
+		})
+
 	})
+
 	player.onCollide("enemy", (enemy) => {
-		destroy(enemy),
+
 		score -= 10
+		
+	
 			scoreText.text=`Score ${score}`
-		wait(3, () => {
+		wait(6, () => {
 			destroy(enemy)
 		})
 	})
+	
+	
+	
+	// --------------------------------
 })
 
 
