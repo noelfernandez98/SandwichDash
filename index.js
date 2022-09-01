@@ -6,20 +6,6 @@ kaboom({
 });
 
 //Timer
-var timeOfGame = 120
-// while(timeOfGame>0)
-// {
-// timeOfGame=timeOfGame-1}
-const li = () => { timeOfGame-- }
-let autocount = setInterval(li, 1000)
-var timerText = `Timer:${new Date((timeOfGame)* 1000).toISOString().substring(14, 19)}`;
-
-add([
-	text(`${timerText}`)
-])
-if (timeOfGame = 0) {
-	go("outro")
-}
 
 
 var score = 0
@@ -170,7 +156,25 @@ scene('game', () => {
 		fixed()
 	]);
 
+var timeOfGame = 120
+// while(timeOfGame>0)
+// {
+// timeOfGame=timeOfGame-1}
+//const li = () => { timeOfGame-- }
+//let autocount = setInterval(li, 1000)
+//var timerText = `Timer:${new Date((timeOfGame)* 1000).toISOString().substring(14, 19)}`;
 
+let timertext=add([
+	text(`Timer:${new Date((timeOfGame)* 1000).toISOString().substring(14, 19)}`),
+	pos(100,100)	
+])
+if (timeOfGame = 0) {
+	go("outro")
+}
+loop(1,()=>{
+	timeOfGame--
+	timertext.text = `Timer:${new Date((timeOfGame)* 1000).toISOString().substring(14, 19)}`;
+})
 	function addButton(txt, p, f) {
 
 		const btn = add([
@@ -240,8 +244,8 @@ scene('game', () => {
 		player.moveTo(mousePos())
 	})
 
-
-	add([
+var score=0
+let scoreText=add([
 		// text() component is similar to sprite() but renders text
 		text(`Score ${score}`),
 		pos(550, 12),
@@ -298,15 +302,17 @@ scene('game', () => {
 
 //Collision
 	player.onCollide("friendly", (food) => {
-		destroy(food),
+	
 			score += 10
-		wait(10, () => {
-			destroy(food)
-		})
+			scoreText.text=`Score ${score}`
+		// wait(10, () => {
+		// 	destroy(food)
+		// })
 	})
 	player.onCollide("enemy", (enemy) => {
 		destroy(enemy),
-			score -= 10
+		score -= 10
+			scoreText.text=`Score ${score}`
 		wait(3, () => {
 			destroy(enemy)
 		})
