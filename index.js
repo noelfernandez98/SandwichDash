@@ -1,6 +1,6 @@
 kaboom({
 	// Scale the whole game up
-	scale: 1,
+	scale: 2,
 	// Set the default font
 	font: "sinko",
 	fontSize:"lar"
@@ -43,7 +43,7 @@ scene('intro', () => {
 	add([
 
 		text("Welcome to Sandwich Dash",{size: 20}),
-		pos(660, 200)
+		pos(220, 200)
 	])
 
 	//create Landing page buttons
@@ -108,7 +108,7 @@ scene('outro', () => {
 		add([
 
 			text("Sorry You Ran Out Of Time",{size: 20}),
-			pos(400, 230)
+			pos(200, 100)
 		])
 	}
 	
@@ -158,7 +158,7 @@ scene('outro', () => {
 	add([
 		// text() component is similar to sprite() but renders text
 		text(`Your New High Score is ${Math.max(...scores)}`,{size: 20}),
-		pos(550, 12),
+		pos(250, 12),
 	])
 	
 add([
