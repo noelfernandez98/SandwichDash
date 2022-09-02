@@ -339,10 +339,7 @@ scores.push(score)
 	
 	player.onCollide("enemy", (enemy) => {
 		lives -= 1
-		score-=1
-			scoreText.text=`Score ${score}`
 		
-		scores.push(score)
 		if (lives == 2) {
 			let livesImg1 = add([
 				sprite("x"),
