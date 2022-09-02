@@ -1,6 +1,6 @@
 kaboom({
 	// Scale the whole game up
-	scale: 2,
+	scale: 1,
 	// Set the default font
 	font: "sinko",
 	fontSize:"lar"
