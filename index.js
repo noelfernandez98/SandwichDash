@@ -26,6 +26,7 @@ loadSprite("bean", "bread.png")
 loadSprite("bone", "bone1.png")
 loadSprite("bomb", "bomb1.png")
 loadSprite("boot", "boot1.png")
+loadSprite("x", "x.png")
 
 
 //Opening scene
@@ -41,8 +42,8 @@ scene('intro', () => {
 
 	add([
 
-		text("Welcome to Sandwich Dash"),
-		pos(660, 100)
+		text("Welcome to Sandwich Dash",{size: 20}),
+		pos(660, 200)
 	])
 
 	//create Landing page buttons
@@ -75,18 +76,19 @@ scene('intro', () => {
 		})
 
 	}
-	addButton("Start", (20, 180), function() {
+	addButton("Start", (200, 60), function() {
 
 		go('game')
 	})
 
-	addButton("How to Play", (600, 200), function() { document.open("instructions.html", "How To Play", "width=600,height=600") })
+	addButton("How to Play",(200, 80), function() { document.open("instructions.html", "How To Play", "width=700,height=700") })
 })
 go('intro')
 
 
 
 //Ending scene
+var lives = 3;
 scene('outro', () => {
 	let background = add([
 		sprite("clearsky"),
@@ -96,11 +98,20 @@ scene('outro', () => {
 		fixed()
 	]);
 
-	add([
+	if (lives == 0) {
+		add([
 
-		text("Sorry You Ran out of time"),
-		pos(400, 230)
-	])
+			text("Sorry You Ran Out of Lives",{size: 20}),
+			pos(400, 230)
+		])
+	} else {
+		add([
+
+			text("Sorry You Ran Out Of Time",{size: 20}),
+			pos(400, 230)
+		])
+	}
+	
 
 	//create Landing page buttons
 	function addButton(txt, p, f) {
@@ -141,12 +152,12 @@ scene('outro', () => {
 
 		go('extra')
 	})
-	addButton("How to Play", (200, 200), function() {	document.open("instructions.html", "How To Play", "width=600,height=600") })
+	addButton("How to Play", (200, 200), function() { document.open("instructions.html", "How To Play", "width=700,height=700") })
 	
 
 	add([
 		// text() component is similar to sprite() but renders text
-		text(`Your New High Score is ${Math.max(...scores)}`),
+		text(`Your New High Score is ${Math.max(...scores)}`,{size: 20}),
 		pos(550, 12),
 	])
 	
@@ -216,7 +227,7 @@ loop(1,()=>{
 
 	}
 
-	addButton("Restart", (90, 50), function() {
+	addButton("Restart", (90, 35), function() {
 
 		go('outro')
 	})
@@ -259,13 +270,15 @@ let scoreText=add([
 scores.push(score)
 
 
+
+	scores.push(score)
 	//Randomizer
 	const toxic = ["boot", "bone", "bomb","sock"]
 	const options = ["meat", "lettuce", "onions", "bread", "tomatoes", "cheese"]
 	const randomizer = () => options[Math.floor(Math.random() * options.length)]
 
 	const looper = () => {
-		loop(5, () => {
+		loop(1, () => {
 			add([
 				sprite(randomizer()),
 				pos(rand(vec2(width())).x, 10),
@@ -284,13 +297,13 @@ scores.push(score)
 	const randomizer2 = () => toxic[Math.floor(Math.random() * toxic.length)]
 
 	const looper2 = () => {
-		loop(1, () => {
+		loop(2, () => {
 			add([
 				sprite(randomizer2()),
 				pos(rand(vec2(width())).x, 10),
 				`tag1`,
 				area(),
-				
+	
 				solid(),
 				scale(.2),
 				move(DOWN, 200),
@@ -312,26 +325,43 @@ scores.push(score)
 
 	player.onCollide("friendly", (food) => {
 	
-			score += 10
+			score += 1
 			scoreText.text=`Score ${score}`
 		
 		scores.push(score)
 		// let method=food.follow(player,vec2(0,-80))
-		wait(2, () => {
-			destroy(food)
-		})
+		destroy(food)
     
       
 		
-})
+	})
+	
+	
 	player.onCollide("enemy", (enemy) => {
-
-		score -= 10
+		lives -= 1
+		score-=1
 			scoreText.text=`Score ${score}`
 		
-		wait(1, () => {
+		scores.push(score)
+		if (lives == 2) {
+			let livesImg1 = add([
+				sprite("x"),
+				pos(550, 24),
+				scale(0.1)
+			])
+		} else if (lives == 1) {
+			let livesImg2 = add([
+				sprite("x"),
+				pos(590, 24),
+				scale(0.1)
+			])
+		} else if (lives == 0) {
+			go("outro")
+		}
+		
+
 			destroy(enemy)
-		})
+
 	})
 	
 })
@@ -366,10 +396,9 @@ add([
 		scale(1.5)
 	])
 
-	loadSound("music", "music.mp3")
+	loadSound("music", "music.m4a")
 	const music = play("music", {
 	loop: true,
 })
 })
-
 
