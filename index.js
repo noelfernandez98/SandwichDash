@@ -42,7 +42,7 @@ scene('intro', () => {
 	add([
 
 		text("Welcome to Sandwich Dash"),
-		pos(500, 200)
+		pos(660, 100)
 	])
 
 	//create Landing page buttons
@@ -75,7 +75,7 @@ scene('intro', () => {
 		})
 
 	}
-	addButton("Start", (200, 20), function() {
+	addButton("Start", (20, 180), function() {
 
 		go('game')
 	})
@@ -216,7 +216,7 @@ loop(1,()=>{
 
 	}
 
-	addButton("Restart", (90, 35), function() {
+	addButton("Restart", (90, 50), function() {
 
 		go('outro')
 	})
@@ -317,7 +317,9 @@ scores.push(score)
 		
 		scores.push(score)
 		// let method=food.follow(player,vec2(0,-80))
-		destroy(food)
+		wait(2, () => {
+			destroy(food)
+		})
     
       
 		
