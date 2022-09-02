@@ -30,7 +30,7 @@ loadSprite("x", "x.png")
 
 
 //Opening scene
-
+var lives = 3
 scene('intro', () => {
 	let background = add([
 		sprite("clearsky"),
@@ -268,7 +268,7 @@ let scoreText=add([
 	])
 scores.push(score)
 
-	var lives = 3
+
 
 	scores.push(score)
 	//Randomizer
