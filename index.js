@@ -97,11 +97,20 @@ scene('outro', () => {
 		fixed()
 	]);
 
-	add([
+	if (lives == 0) {
+		add([
 
-		text("Sorry You Ran out of time"),
-		pos(400, 230)
-	])
+			text("Sorry You Ran Out of Lives"),
+			pos(400, 230)
+		])
+	} else {
+		add([
+
+			text("Sorry You Ran Out Of Time"),
+			pos(400, 230)
+		])
+	}
+	
 
 	//create Landing page buttons
 	function addButton(txt, p, f) {
