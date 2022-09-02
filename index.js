@@ -26,6 +26,7 @@ loadSprite("bean", "bread.png")
 loadSprite("bone", "bone1.png")
 loadSprite("bomb", "bomb1.png")
 loadSprite("boot", "boot1.png")
+loadSprite("x", "x.png")
 
 
 //Opening scene
@@ -258,14 +259,16 @@ let scoreText=add([
 	])
 scores.push(score)
 
+	var lives = 3
 
+	scores.push(score)
 	//Randomizer
 	const toxic = ["boot", "bone", "bomb","sock"]
 	const options = ["meat", "lettuce", "onions", "bread", "tomatoes", "cheese"]
 	const randomizer = () => options[Math.floor(Math.random() * options.length)]
 
 	const looper = () => {
-		loop(5, () => {
+		loop(1, () => {
 			add([
 				sprite(randomizer()),
 				pos(rand(vec2(width())).x, 10),
@@ -284,13 +287,13 @@ scores.push(score)
 	const randomizer2 = () => toxic[Math.floor(Math.random() * toxic.length)]
 
 	const looper2 = () => {
-		loop(1, () => {
+		loop(5, () => {
 			add([
 				sprite(randomizer2()),
 				pos(rand(vec2(width())).x, 10),
 				`tag1`,
 				area(),
-				
+	
 				solid(),
 				scale(.2),
 				move(DOWN, 200),
@@ -312,7 +315,7 @@ scores.push(score)
 
 	player.onCollide("friendly", (food) => {
 	
-			score += 10
+			score += 1
 			scoreText.text=`Score ${score}`
 		
 		scores.push(score)
@@ -321,15 +324,31 @@ scores.push(score)
     
       
 		
-})
+	})
+	
+	
 	player.onCollide("enemy", (enemy) => {
-
-		score -= 10
-			scoreText.text=`Score ${score}`
+		lives -= 1
 		
-		wait(1, () => {
+		if (lives == 2) {
+			let livesImg1 = add([
+				sprite("x"),
+				pos(550, 24),
+				scale(0.1)
+			])
+		} else if (lives == 1) {
+			let livesImg2 = add([
+				sprite("x"),
+				pos(590, 24),
+				scale(0.1)
+			])
+		} else if (lives == 0) {
+			go("outro")
+		}
+		
+
 			destroy(enemy)
-		})
+
 	})
 	
 })
