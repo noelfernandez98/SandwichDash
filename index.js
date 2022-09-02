@@ -3,6 +3,7 @@ kaboom({
 	scale: 2,
 	// Set the default font
 	font: "sinko",
+	fontSize:"lar"
 });
 
 //Timer
@@ -18,6 +19,8 @@ loadSprite("bread", "bread.png")
 loadSprite("bread2", "bread.png")
 loadSprite("cheese", "cheese.png")
 loadSprite("burger", "burger.png")
+loadSprite("sock", "sock.png")
+loadSprite("extra", "extra.jfif")
 // Load assets
 loadSprite("bean", "bread.png")
 loadSprite("bone", "bone1.png")
@@ -38,7 +41,7 @@ scene('intro', () => {
 
 	add([
 
-		text("Welcome to SandWich Dash"),
+		text("Welcome to Sandwich Dash"),
 		pos(500, 200)
 	])
 
@@ -96,7 +99,7 @@ scene('outro', () => {
 	add([
 
 		text("Sorry You Ran out of time"),
-		pos(400, 250)
+		pos(400, 230)
 	])
 
 	//create Landing page buttons
@@ -134,12 +137,12 @@ scene('outro', () => {
 		go('game')
 	})
 
+	addButton("Extras", (800, 500), function() {
+
+		go('extra')
+	})
 	addButton("How to Play", (200, 200), function() {	document.open("instructions.html", "How To Play", "width=600,height=600") })
 	
-
-		
-	
-
 
 	add([
 		// text() component is similar to sprite() but renders text
@@ -230,7 +233,7 @@ loop(1,()=>{
 		// solid() component makes the object can't move pass other solid objects
 		solid(),
 		// center() returns the center point vec2(width() / 2, height() / 2)
-		pos(center()),
+		pos(width() / 2, height() / 1.25),
 	])
 	// onKeyDown() registers an event that runs every frame as long as user is holding a certain key
 	onKeyDown("left", () => {
@@ -240,12 +243,7 @@ loop(1,()=>{
 	onKeyDown("right", () => {
 		player.move(SPEED, 0)
 	})
-	onKeyDown("up", () => {
-		player.move(0, -SPEED)
-	})
-	onKeyDown("down", () => {
-		player.move(0, SPEED)
-	})
+
 	// onClick() registers an event that runs once when left mouse is clicked
 	onClick(() => {
 		// .moveTo() is provided by pos() component, changes the position
@@ -262,7 +260,7 @@ scores.push(score)
 
 
 	//Randomizer
-	const toxic = ["boot", "bone", "bomb"]
+	const toxic = ["boot", "bone", "bomb","sock"]
 	const options = ["meat", "lettuce", "onions", "bread", "tomatoes", "cheese"]
 	const randomizer = () => options[Math.floor(Math.random() * options.length)]
 
@@ -271,6 +269,7 @@ scores.push(score)
 			add([
 				sprite(randomizer()),
 				pos(rand(vec2(width())).x, 10),
+		
 				`tag1`,
 				area(),
 				solid(),
@@ -291,9 +290,10 @@ scores.push(score)
 				pos(rand(vec2(width())).x, 10),
 				`tag1`,
 				area(),
+				
 				solid(),
 				scale(.2),
-				move(DOWN, 240),
+				move(DOWN, 200),
 				"enemy"
 			])
 		});
@@ -309,32 +309,29 @@ scores.push(score)
 
 
 //Collision
+
 	player.onCollide("friendly", (food) => {
 	
 			score += 10
 			scoreText.text=`Score ${score}`
 		
 		scores.push(score)
-			wait(1, () => {
-			destroy(food)
-		})
-
-	})
-
+		// let method=food.follow(player,vec2(0,-80))
+		destroy(food)
+    
+      
+		
+})
 	player.onCollide("enemy", (enemy) => {
 
 		score -= 10
-		
-	
 			scoreText.text=`Score ${score}`
-		wait(6, () => {
+		
+		wait(1, () => {
 			destroy(enemy)
 		})
 	})
 	
-	
-	
-	// --------------------------------
 })
 
 
@@ -349,3 +346,28 @@ const music = play("music", {
 
 // Adjust global volume
 volume(0.5)
+
+
+scene('extra', () => {
+	let background = add([
+		sprite("extra"),
+		pos(width() / 2, height() / 2),
+		origin("center"),
+		scale(2),
+		fixed()
+	]);
+
+add([
+
+		text("Coming Soon"),
+		pos(500, 200),
+		scale(1.5)
+	])
+
+	loadSound("music", "music.mp3")
+	const music = play("music", {
+	loop: true,
+})
+})
+
+
