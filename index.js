@@ -30,7 +30,7 @@ loadSprite("x", "x.png")
 
 
 //Opening scene
-var lives = 3
+
 scene('intro', () => {
 	let background = add([
 		sprite("clearsky"),
@@ -88,6 +88,7 @@ go('intro')
 
 
 //Ending scene
+var lives = 3
 scene('outro', () => {
 	let background = add([
 		sprite("clearsky"),
