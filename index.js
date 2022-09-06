@@ -102,7 +102,7 @@ scene('outro', () => {
 		add([
 
 			text("Sorry You Ran Out of Lives",{size: 20}),
-			pos(400, 230)
+			pos(400, 100)
 		])
 	} else {
 		add([
@@ -112,6 +112,7 @@ scene('outro', () => {
 		])
 	}
 	
+	lives=3
 
 	//create Landing page buttons
 	function addButton(txt, p, f) {
@@ -148,7 +149,7 @@ scene('outro', () => {
 		go('game')
 	})
 
-	addButton("Extras", (800, 500), function() {
+	addButton("Extras", (400, 250), function() {
 
 		go('extra')
 	})
@@ -339,7 +340,10 @@ scores.push(score)
 	
 	player.onCollide("enemy", (enemy) => {
 		lives -= 1
+		score -= 1
+			scoreText.text=`Score ${score}`
 		
+		scores.push(score)
 		if (lives == 2) {
 			let livesImg1 = add([
 				sprite("x"),
