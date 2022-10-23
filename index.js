@@ -228,6 +228,11 @@ loop(1,()=>{
 
 	}
 
+	loadSound("music", "music.m4a")
+	const music = play("music", {
+	loop: true,
+})
+
 	addButton("Restart", (90, 35), function() {
 
 		go('outro')
